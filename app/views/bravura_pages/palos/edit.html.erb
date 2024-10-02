@@ -1,2 +1,6 @@
-<h1>Palos#edit</h1>
-<p>Find me in app/views/bravura_pages/palos/edit.html.erb</p>
+<h1>Edit Palo</h1>
+
+<%= render 'form', palo: @palo %>
+
+<%= link_to 'Show', @palo, class: 'btn btn-secondary mt-3' %>
+<%= link_to 'Back to List', palos_path, class: 'btn btn-secondary mt-3' %>

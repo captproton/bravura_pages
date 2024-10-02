@@ -1,4 +1,5 @@
 BravuraPages::Engine.routes.draw do
   resources :palos
-  root 'palos#index'
+  resources :static_pages
+  root "static_pages#index"
 end

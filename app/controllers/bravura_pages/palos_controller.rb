@@ -1,6 +1,8 @@
+require_dependency "bravura_pages/application_controller"
+
 module BravuraPages
-  class PalosController < ApplicationController
-    before_action :set_palo, only: [:show, :edit, :update, :destroy]
+  class PalosController < BravuraPages::ApplicationController
+    before_action :set_palo, only: [ :show, :edit, :update, :destroy ]
 
     def index
       @palos = Palo.all
@@ -15,8 +17,9 @@ module BravuraPages
 
     def create
       @palo = Palo.new(palo_params)
+      @palo.author = current_user
       if @palo.save
-        redirect_to @palo, notice: 'Palo was successfully created.'
+        redirect_to @palo, notice: "Palo was successfully created."
       else
         render :new
       end
@@ -27,7 +30,7 @@ module BravuraPages
 
     def update
       if @palo.update(palo_params)
-        redirect_to @palo, notice: 'Palo was successfully updated.'
+        redirect_to @palo, notice: "Palo was successfully updated."
       else
         render :edit
       end
@@ -35,13 +38,13 @@ module BravuraPages
 
     def destroy
       @palo.destroy
-      redirect_to palos_url, notice: 'Palo was successfully destroyed.'
+      redirect_to palos_url, notice: "Palo was successfully destroyed."
     end
 
     private
 
     def set_palo
-      @palo = Palo.find_by!(slug: params[:id])
+      @palo = Palo.find(params[:id])
     end
 
     def palo_params

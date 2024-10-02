@@ -1,16 +1,74 @@
-<p style="color: green"><%= notice %></p>
+<main class="min-w-0 flex-1 overflow-y-auto overscroll-none border-l border-gray-200 bg-gray-50 py-8 dark:border-gray-700 dark:bg-gray-900">
+  <div class="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-full flex-col justify-between">
+      <section class="flex-1">
+        <div class="md:flex md:items-center md:justify-between">
+          <div>
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900">Static Pages</h1>
+          </div>
+          <div class="mt-5 md:mt-0 xl:flex xl:items-center xl:justify-end">
+            <%= link_to new_static_page_path, class: "inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-gray-900 px-6 py-3 text-base font-semibold text-white transition-all duration-200 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 sm:w-auto xl:ml-5" do %>
+              <svg class="mr-2 -ml-1 h-5 w-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.25C12.4142 4.25 12.75 4.58579 12.75 5V11.25H19C19.4142 11.25 19.75 11.5858 19.75 12C19.75 12.4142 19.4142 12.75 19 12.75H12.75V19C12.75 19.4142 12.4142 19.75 12 19.75C11.5858 19.75 11.25 19.4142 11.25 19V12.75H5C4.58579 12.75 4.25 12.4142 4.25 12C4.25 11.5858 4.58579 11.25 5 11.25H11.25V5C11.25 4.58579 11.5858 4.25 12 4.25Z"></path>
+              </svg>
+              Create new page
+            <% end %>
+          </div>
+        </div>
 
-<% content_for :title, "Static pages" %>
+        <div class="mt-8 space-y-6">
+          <div class="divide-y divide-gray-200 rounded-lg border border-gray-200 shadow-sm dark:border-gray-700">
+            <div class="rounded-t-lg bg-white px-4 py-4 sm:px-6">
+              <h2 class="text-lg font-semibold text-gray-900">Static Pages</h2>
+              <p class="mt-1 text-sm font-medium text-gray-500">Manage your static pages here.</p>
+            </div>
+            <div class="hidden overflow-x-auto xl:flex xl:flex-col">
+              <div class="-mt-2">
+                <div class="my-0.5 inline-block min-w-full pt-2 align-middle">
+                  <div class="rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+                      <thead class="rounded-lg bg-gray-50">
+                        <tr class="rounded-lg">
+                          <th scope="col" class="whitespace-nowrap rounded-lg px-6 py-3 text-left text-xs font-semibold uppercase tracking-widest text-gray-500">Page Title</th>
+                          <th scope="col" class="whitespace-nowrap rounded-lg px-6 py-3 text-left text-xs font-semibold uppercase tracking-widest text-gray-500">Status</th>
+                          <th scope="col" class="whitespace-nowrap rounded-lg px-6 py-3 text-left text-xs font-semibold uppercase tracking-widest text-gray-500">Last Edited on</th>
+                          <th scope="col" class="relative rounded-lg px-6 py-3"><span class="sr-only">Actions</span></th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-200 rounded-lg">
+                        <% @static_pages.each do |static_page| %>
+                          <tr class="rounded-lg bg-white transition-all duration-200 hover:bg-gray-50">
+                            <td class="whitespace-nowrap rounded-lg px-6 py-4">
+                              <p class="w-96 text-base font-semibold text-gray-900"><%= static_page.title %></p>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                              <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-800">
+                                <%= static_page.published? ? 'Published' : 'Draft' %>
+                              </span>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4 text-base font-medium text-gray-500">
+                              <%= static_page.updated_at.strftime("%d %b %Y") %>
+                            </td>
+                            <td class="whitespace-nowrap rounded-lg px-6 py-4 text-right text-sm font-medium">
+                              <%= link_to "View", static_page, class: "inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2" %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<h1>Static pages</h1>
-
-<div id="static_pages">
-  <% @static_pages.each do |static_page| %>
-    <%= render static_page %>
-    <p>
-      <%= link_to "Show this static page", static_page %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New static page", new_static_page_path %>
+      <footer class="mt-12">
+        <p class="text-center text-sm font-medium text-gray-500 dark:text-gray-400">
+          © <%= Time.current.year %> Your Company Name. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </div>
+</main>

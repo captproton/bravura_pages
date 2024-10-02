@@ -1,23 +1,29 @@
-# app/models/bravura_pages/static_page.rb
-require "friendly_id"
+require "acts_as_tenant"
 
 module BravuraPages
   class StaticPage < ApplicationRecord
-    extend FriendlyId
     acts_as_tenant(:account)
-
-    friendly_id :title, use: :scoped, scope: :account
+    belongs_to :account
+    belongs_to :author, class_name: "User"
 
     validates :title, presence: true
     validates :content, presence: true
+    # validates :slug, presence: true, uniqueness: { scope: :account_id }
 
-    # Remove the custom slug generation as friendly_id will handle this
-    # before_validation :generate_slug, if: -> { slug.blank? && title.present? }
+    scope :published, -> { where("published_at <= ?", Time.current) }
+
+    # def publish
+    #   update(published_at: Time.current)
+    # end
+
+    # def published?
+    #   published_at.present? && published_at <= Time.current
+    # end
 
     private
 
-    def should_generate_new_friendly_id?
-      title_changed? || super
-    end
+    # def generate_slug
+    #   self.slug = title.to_s.parameterize
+    # end
   end
 end

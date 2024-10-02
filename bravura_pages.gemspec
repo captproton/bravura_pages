@@ -23,10 +23,11 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.1.0"
+  spec.add_dependency "acts_as_tenant", "~> 1.0.1"
+  spec.add_dependency "pg"
   # spec.add_dependency "friendly_id", "~> 5.4"
 
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "factory_bot_rails"
   spec.add_development_dependency "database_cleaner"
-
 end

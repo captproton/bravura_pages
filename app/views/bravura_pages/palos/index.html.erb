@@ -1,12 +1,26 @@
+<%# # app/views/bravura_pages/palos/index.html.erb %>
 <h1>Palos</h1>
 
-<%= link_to 'New Palo', new_palo_path %>
-
-<% @palos.each do |palo| %>
-  <div>
-    <h2><%= link_to palo.title, palo_path(palo) %></h2>
-    <p><%= truncate(palo.content, length: 100) %></p>
-    <%= link_to 'Edit', edit_palo_path(palo) %>
-    <%= link_to 'Delete', palo_path(palo), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
-<% end %>
+<%= link_to 'New Palo', new_palo_path, class: 'btn btn-primary' %>
+<%= link_to 'New Palo', bravura_pages.new_palo_path, class: 'btn btn-primary' %>
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @palos.each do |palo| %>
+      <tr>
+        <td><%= link_to palo.title, palo_path(palo) %></td>
+        <td><%= palo.author.name %></td>
+        <td>
+          <%= link_to 'Edit', edit_palo_path(palo), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', palo_path(palo), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

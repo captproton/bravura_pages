@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_01_004935) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_bravura_pages_palos_on_slug", unique: true
+    t.index [ "slug" ], name: "index_bravura_pages_palos_on_slug", unique: true
   end
 
   create_table "bravura_pages_static_pages", force: :cascade do |t|
@@ -27,8 +27,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_01_004935) do
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id", "slug"], name: "index_bravura_pages_static_pages_on_account_id_and_slug", unique: true
-    t.index ["account_id"], name: "index_bravura_pages_static_pages_on_account_id"
+    t.index [ "account_id", "slug" ], name: "index_bravura_pages_static_pages_on_account_id_and_slug", unique: true
+    t.index [ "account_id" ], name: "index_bravura_pages_static_pages_on_account_id"
   end
 
   add_foreign_key "bravura_pages_static_pages", "accounts"
