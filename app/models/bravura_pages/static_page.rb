@@ -2,6 +2,9 @@ require "acts_as_tenant"
 
 module BravuraPages
   class StaticPage < ApplicationRecord
+    extend FriendlyId
+    friendly_id :title, use: :slugged
+
     acts_as_tenant(:account)
     belongs_to :account
     belongs_to :author, class_name: "User"

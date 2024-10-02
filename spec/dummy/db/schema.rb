@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_01_004935) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_02_021743) do
   create_table "bravura_pages_palos", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [ "slug" ], name: "index_bravura_pages_palos_on_slug", unique: true
+    t.index ["slug"], name: "index_bravura_pages_palos_on_slug", unique: true
   end
 
   create_table "bravura_pages_static_pages", force: :cascade do |t|
@@ -27,8 +27,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_01_004935) do
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [ "account_id", "slug" ], name: "index_bravura_pages_static_pages_on_account_id_and_slug", unique: true
-    t.index [ "account_id" ], name: "index_bravura_pages_static_pages_on_account_id"
+    t.index ["account_id", "slug"], name: "index_bravura_pages_static_pages_on_account_id_and_slug", unique: true
+    t.index ["account_id"], name: "index_bravura_pages_static_pages_on_account_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   add_foreign_key "bravura_pages_static_pages", "accounts"
