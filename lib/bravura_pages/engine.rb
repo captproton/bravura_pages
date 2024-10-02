@@ -8,6 +8,10 @@ module BravuraPages
       g.factory_bot dir: "spec/factories"
     end
 
+    config.autoload_paths << File.expand_path("#{root}/app/models")
+    config.autoload_paths << File.expand_path("#{root}/app/controllers")
+    config.autoload_paths << File.expand_path("#{root}/app/helpers")
+
     initializer "bravura_pages.set_account_class" do |app|
       BravuraPages.setup do |config|
         config.account_class = "Account"
