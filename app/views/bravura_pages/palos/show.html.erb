@@ -1,0 +1,12 @@
+<h1><%= @palo.title %></h1>
+
+<p>
+  <strong>Author:</strong> <%= @palo.author.name %>
+</p>
+
+<div class="palo-content">
+  <%= simple_format @palo.content %>
+</div>
+
+<%= link_to 'Edit', edit_palo_path(@palo), class: 'btn btn-secondary' %>
+<%= link_to 'Back to List', palos_path, class: 'btn btn-primary' %>
