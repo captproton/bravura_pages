@@ -9,7 +9,7 @@ module BravuraPages
       end
 
       def add_routes
-        route 'mount BravuraPages::Engine, at: "/palo"'
+        route 'mount BravuraPages::Engine, at: "/bravura_pages"'
       end
 
       def copy_migrations
@@ -18,7 +18,7 @@ module BravuraPages
 
       def add_bravura_pages_to_model
         inject_into_file "app/models/account.rb", after: "class Account < ApplicationRecord\n" do
-          "  has_many :palos, class_name: 'BravuraPages::Palo'\n"
+          "  has_many :static_pages, class_name: 'BravuraPages::StaticPage'\n"
         end
       end
     end

@@ -103,6 +103,10 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -238,6 +242,8 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -265,10 +271,14 @@ PLATFORMS
 DEPENDENCIES
   bravura_pages!
   database_cleaner
+  database_cleaner-active_record
   factory_bot_rails
+  faker
+  friendly_id (~> 5.5.1)
   puma
   rspec-rails
   rubocop-rails-omakase
+  shoulda-matchers
   sprockets-rails
   sqlite3
 

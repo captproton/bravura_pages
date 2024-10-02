@@ -1,3 +1,4 @@
+# spec/dummy/config/application.rb
 require_relative "boot"
 
 require "rails"
@@ -17,6 +18,7 @@ require "action_cable/engine"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require "bravura_pages"
 
 module Dummy
   class Application < Rails::Application
@@ -40,5 +42,28 @@ module Dummy
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Add configurations for your engine
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
+
+    # Enable zeitwerk mode
+    config.autoloader = :zeitwerk
+
+    # Configure ActionMailer
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+    # Add engine-specific configurations here
+    config.bravura_pages = ActiveSupport::OrderedOptions.new
+    config.bravura_pages.some_option = 'some value'
+
+    # Load engine-specific initializers
+    initializer 'bravura_pages.load_engine_initializers' do
+      Dir["#{BravuraPages::Engine.root}/config/initializers/**/*.rb"].each do |initializer|
+        load(initializer)
+      end
+    end
   end
 end
