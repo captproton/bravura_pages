@@ -1,12 +1,7 @@
-<% content_for :title, "Editing static page" %>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Edit Static Page</h1>
 
-<h1>Editing static page</h1>
-
-<%= render "form", static_page: @static_page %>
-
-<br>
-
-<div>
-  <%= link_to "Show this static page", @static_page %> |
-  <%= link_to "Back to static pages", static_pages_path %>
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <%= render 'form', static_page: @static_page %>
+  </div>
 </div>
