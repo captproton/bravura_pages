@@ -1,12 +1,34 @@
 # BravuraPages
 
-BravuraPages is a Rails engine that allows users to create and manage static pages. It provides a simple and flexible way to add static page functionality to your Rails application.
+BravuraPages is a powerful Rails engine that simplifies the creation and management of static pages in your Rails application.
+
+[![Gem Version](https://badge.fury.io/rb/bravura_pages.svg)](https://badge.fury.io/rb/bravura_pages)
+[![Build Status](https://travis-ci.org/yourusername/bravura_pages.svg?branch=main)](https://travis-ci.org/yourusername/bravura_pages)
+[![Coverage Status](https://coveralls.io/repos/github/yourusername/bravura_pages/badge.svg?branch=main)](https://coveralls.io/github/yourusername/bravura_pages?branch=main)
+
+## Table of Contents
+
+- [BravuraPages](#bravurapages)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Customization](#customization)
+  - [Troubleshooting](#troubleshooting)
+  - [Development](#development)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Features
 
-- Create, read, update, and delete static pages
-- Customizable views and styling
-- Easy integration with existing Rails applications
+BravuraPages offers a range of features to enhance your Rails application:
+
+- **CRUD Operations**: Easily create, read, update, and delete static pages.
+- **Customizable Views**: Fully customizable views and styling to match your application's design.
+- **Seamless Integration**: Effortlessly integrates with existing Rails applications.
+- **Admin Interface**: A user-friendly admin interface for managing pages.
+- **SEO-friendly URLs**: Automatically generates SEO-friendly URLs for your static pages.
 
 ## Installation
 
@@ -45,6 +67,8 @@ rails bravura_pages:install:migrations
 rails db:migrate
 ```
 
+**Note**: BravuraPages is compatible with Rails 6.0 and above.
+
 ## Usage
 
 After installation, you can access the static pages at `/static_pages` in your application. Here are some key features:
@@ -54,7 +78,18 @@ After installation, you can access the static pages at `/static_pages` in your a
 - View a specific static page: `/static_pages/:id`
 - Edit a static page: `/static_pages/:id/edit`
 
-You can customize the appearance and behavior of BravuraPages by overriding its views, controllers, and models in your main application.
+Example of creating a new static page in your controller:
+
+```ruby
+@page = BravuraPages::Page.new(title: 'About Us', content: 'Welcome to our company!')
+@page.save
+```
+
+Rendering a static page in your view:
+
+```erb
+<%= render_bravura_page('about-us') %>
+```
 
 ## Configuration
 
@@ -62,7 +97,8 @@ You can configure BravuraPages in the initializer file created by the install ge
 
 ```ruby
 BravuraPages.setup do |config|
-  # Add your configuration options here
+  config.page_title_prefix = 'My App - '
+  config.admin_authorization = -> (controller) { controller.current_user.admin? }
 end
 ```
 
@@ -74,7 +110,23 @@ To customize the views, you can copy them to your main app:
 rails generate bravura_pages:views
 ```
 
-This will copy all views into [`app/views/bravura_pages/`](command:_github.copilot.openRelativePath?%5B%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2FUsers%2Fcarltanner%2Fdev%2Fruby%2Fgems%2Fbravura_pages%2Fapp%2Fviews%2Fbravura_pages%2F%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22262f576f-19aa-4153-8532-ebc1b7d8290a%22%5D "/Users/carltanner/dev/ruby/gems/bravura_pages/app/views/bravura_pages/") in your main app, where you can modify them.
+This will copy all views into `app/views/bravura_pages/` in your main app, where you can modify them.
+
+## Troubleshooting
+
+If you encounter issues, try the following:
+
+1. Ensure all migrations are run: `rails db:migrate`
+2. Check your routes file for proper mounting of BravuraPages
+3. Clear your cache: `rails tmp:cache:clear`
+
+If problems persist, please [open an issue](https://github.com/yourusername/bravura_pages/issues).
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
